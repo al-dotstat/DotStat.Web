@@ -14,6 +14,7 @@ const ComplexListItem: React.FC<ComplexListItemProps> = ({ complex }) => {
           alt={complex.nameRu}
           src={"/placeholder.png"}
           width={200}
+          height={200}
           className="max-w-48 aspect-square"
         />
       </div>

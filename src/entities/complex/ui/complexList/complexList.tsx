@@ -9,10 +9,8 @@ import { useSearchComplexes } from "../../hooks";
 export interface ComplexListProps {}
 
 const ComplexList: React.FC<ComplexListProps> = ({}) => {
-  const [developersIds, districtsIds] = useComplexFiltersStore((state) => [
-    state.developersIds,
-    state.districtsIds,
-  ]);
+  const developersIds = useComplexFiltersStore((state) => state.developersIds);
+  const districtsIds = useComplexFiltersStore((state) => state.districtsIds);
   const { data, isSuccess } = useSearchComplexes({
     developersIds,
     districtsIds,
