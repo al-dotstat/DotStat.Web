@@ -1,5 +1,3 @@
-"use client";
-
 import { ComplexFilters, ComplexList } from "@/entities/complex";
 import Block from "@/shared/ui/block";
 
@@ -12,7 +10,7 @@ export default function AppPage() {
         </aside>
       </Block>
 
-      <main>
+      <main className="w-full">
         <h1 className="font-semibold text-2xl">Список жилых комплексов</h1>
         <ComplexList />
       </main>

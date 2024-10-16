@@ -11,11 +11,11 @@ export type Complex = {
   latitude?: string;
   longitude?: string;
   area?: number;
-  completionDate?: Date;
+  completionDate?: string;
   districtId: number;
   developers: ComplexDeveloper[];
-  createdDateTime: Date;
-  updatedDateTime: Date;
+  createdDateTime: string;
+  updatedDateTime: string;
 };
 
 export type ComplexFiltersParams = {

@@ -11,9 +11,9 @@ export type Order = {
   userId: number;
   items: OrderItem[];
   fileName: string;
-  fileExpiredDateTime: Date;
-  createdDateTime: Date;
-  updatedDateTime: Date;
+  fileExpiredDateTime: string;
+  createdDateTime: string;
+  updatedDateTime: string;
 };
 
 export type OrderRequest = {

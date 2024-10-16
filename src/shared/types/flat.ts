@@ -10,8 +10,8 @@ export type FlatDeclaration = {
   ceilingHeight: number;
   entrance: string;
   unique: string;
-  createdDateTime: Date;
-  updatedDateTime: Date;
+  createdDateTime: string;
+  updatedDateTime: string;
 };
 
 export type FlatParsingInfo = {
@@ -25,10 +25,10 @@ export type FlatParsingInfo = {
   building?: string;
   additionalJsonInfo?: string;
   price: number;
-  date: Date;
+  date: string;
   status: Status;
-  createdDateTime: Date;
-  updatedDateTime: Date;
+  createdDateTime: string;
+  updatedDateTime: string;
 };
 
 export type Flat = {
@@ -41,6 +41,6 @@ export type Flat = {
   developerUnique?: string;
   additionalJsonInfo?: string;
   declaration?: FlatDeclaration;
-  createdDateTime: Date;
-  updatedDateTime: Date;
+  createdDateTime: string;
+  updatedDateTime: string;
 };

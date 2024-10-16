@@ -1,11 +1,11 @@
 export type Parse = {
   id: number;
-  date: Date;
+  date: string;
   complexId: number;
   areFlatsParsed: boolean;
   areParkingsParsed: boolean;
   areStoragesParsed: boolean;
   areCommercialsParsed: boolean;
-  createdDateTime: Date;
-  updatedDateTime: Date;
+  createdDateTime: string;
+  updatedDateTime: string;
 };
