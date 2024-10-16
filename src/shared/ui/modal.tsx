@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({
       <Dialog open={isOpen} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-[425px] overflow-y-auto max-h-screen">
           <DialogHeader>
-            {title && <DialogTitle>{title}</DialogTitle>}
+            <DialogTitle>{title}</DialogTitle>
             {description && (
               <DialogDescription>{description}</DialogDescription>
             )}
