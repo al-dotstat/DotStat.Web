@@ -13,7 +13,7 @@ const getAllComplexes = async () => {
   const response = await apiClient.get<CollectionResponse<Complex>>(
     "/complexes"
   );
-  return response.data.Items;
+  return response.data.items;
 };
 
 const searchComplexes = async (params: ComplexFiltersParams) => {
@@ -24,21 +24,21 @@ const searchComplexes = async (params: ComplexFiltersParams) => {
     }
   );
 
-  return response.data.Items;
+  return response.data.items;
 };
 
 const getComplexBuildings = async (id: number) => {
   const response = await apiClient.get<CollectionResponse<Building>>(
     `/complexes/${id}/buildings`
   );
-  return response.data.Items;
+  return response.data.items;
 };
 
 const getComplexDevelopers = async (id: number) => {
   const response = await apiClient.get<CollectionResponse<Developer>>(
     `/complexes/${id}/developers`
   );
-  return response.data.Items;
+  return response.data.items;
 };
 
 const complexesController = {

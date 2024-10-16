@@ -12,14 +12,14 @@ const getAllDistricts = async () => {
   const response = await apiClient.get<CollectionResponse<District>>(
     "/districts"
   );
-  return response.data.Items;
+  return response.data.items;
 };
 
 const getDistrictComplexes = async (id: number) => {
   const response = await apiClient.get<CollectionResponse<Complex>>(
     `/districts/${id}/complexes`
   );
-  return response.data.Items;
+  return response.data.items;
 };
 
 const districtsController = {

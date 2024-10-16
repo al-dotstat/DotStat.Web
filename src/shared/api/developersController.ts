@@ -12,14 +12,14 @@ const getAllDevelopers = async () => {
   const response = await apiClient.get<CollectionResponse<Developer>>(
     "/developers"
   );
-  return response.data.Items;
+  return response.data.items;
 };
 
 const getDeveloperComplexes = async (id: number) => {
   const response = await apiClient.get<CollectionResponse<Complex>>(
     `/developers/${id}/complexes`
   );
-  return response.data.Items;
+  return response.data.items;
 };
 
 const developersController = {

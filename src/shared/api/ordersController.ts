@@ -11,7 +11,7 @@ const getOrderHistory = async () => {
   const response = await apiClient.get<CollectionResponse<Order>>(
     "/orders/history"
   );
-  return response.data.Items;
+  return response.data.items;
 };
 
 const createOrder = async (data: OrderRequest) => {
