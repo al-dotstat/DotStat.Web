@@ -70,7 +70,12 @@ apiClient.interceptors.response.use(
       isRefreshing = true;
 
       return new Promise(function (resolve, reject) {
-        if (!apiClient.getRefreshToken()) reject(error);
+        if (!apiClient.getRefreshToken()) {
+          processQueue(error, null);
+          isRefreshing = false;
+          reject(error);
+          return;
+        }
         usersController
           .refreshToken({ refreshToken: apiClient.getRefreshToken()! })
           .then((data) => {
