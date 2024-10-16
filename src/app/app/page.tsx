@@ -7,7 +7,7 @@ export default function AppPage() {
   return (
     <div className="flex gap-5">
       <Block asChild>
-        <aside className="p-5 w-72 max-xl:w-60 sticky">
+        <aside className="p-5 w-72 max-xl:w-60 sticky h-fit">
           <ComplexFilters />
         </aside>
       </Block>
