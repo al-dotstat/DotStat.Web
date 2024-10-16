@@ -41,7 +41,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
   const onSubmit = useCallback(
     (data: FormSchema) => {
-      console.log(data);
       mutate(data);
     },
     [mutate]

@@ -42,7 +42,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 
   const onSubmit = useCallback(
     (data: FormSchema) => {
-      console.log(data);
       mutate(data);
     },
     [mutate]
