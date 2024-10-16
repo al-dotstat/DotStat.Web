@@ -35,8 +35,21 @@ export const developerKeys = {
     [...developerKeys.detail(id), "complexes"] as const,
 };
 
+export const districtKeys = {
+  all: ["districts"] as const,
+  details: () => [...districtKeys.all, "detail"] as const,
+  detail: (id: number) => [...districtKeys.details(), id] as const,
+  complexes: (id: number) => [...districtKeys.detail(id), "complexes"] as const,
+};
+
 export const orderKeys = {
   all: ["orders"] as const,
   details: () => [...orderKeys.all, "detail"] as const,
   detail: (id: number) => [...orderKeys.details(), id] as const,
+  history: () => [...orderKeys.details(), "history"] as const,
+};
+
+export const searchKeys = {
+  all: ["search"] as const,
+  search: (search: string) => [...searchKeys.all, search] as const,
 };

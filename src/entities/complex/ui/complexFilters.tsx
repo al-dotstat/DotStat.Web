@@ -53,7 +53,6 @@ const ComplexFilters: React.FC = ({}) => {
       applyFilters({
         developersIds: developersIds,
         districtsIds: [],
-        metrosIds: [],
       });
     },
     [applyFilters]
