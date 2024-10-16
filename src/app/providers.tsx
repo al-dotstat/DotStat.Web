@@ -16,9 +16,13 @@ const Providers: React.FC<PropsWithChildren> = ({ children }) => {
     new QueryClient({
       queryCache: new QueryCache({
         onError: (err) => {
-          toast.error("Не удалось выполнить запрос");
-          if (axios.isAxiosError(err) && err.response?.status === 401)
-            router.push("/auth");
+          if (axios.isAxiosError(err)) {
+            if (err.response?.status === 401) router.push("/auth");
+            else if (err.response && err.response?.status >= 500)
+              toast.error("Сервер не смог обработать запрос");
+          } else {
+            toast.error("Не удалось выполнить запрос");
+          }
         },
       }),
       defaultOptions: {
