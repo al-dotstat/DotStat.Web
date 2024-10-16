@@ -17,6 +17,7 @@ import {
 } from "@/shared/ui/form";
 import { Button } from "@/shared/ui/button";
 import useComplexFiltersStore from "../model/complexFiltersStore";
+import { useAllDistricts } from "@/entities/district";
 
 const optionSchema = z.object({
   label: z.string(),
@@ -25,7 +26,8 @@ const optionSchema = z.object({
 });
 
 const FormSchema = z.object({
-  developers: z.array(optionSchema).min(1),
+  developers: z.array(optionSchema).optional(),
+  districts: z.array(optionSchema).optional(),
 });
 
 const ComplexFilters: React.FC = ({}) => {
@@ -34,52 +36,91 @@ const ComplexFilters: React.FC = ({}) => {
     resolver: zodResolver(FormSchema),
   });
 
-  const { data, isSuccess } = useAllDevelopers();
+  const { data: developers, isSuccess: areDevelopersSucceed } =
+    useAllDevelopers();
+  const { data: districts, isSuccess: areDistrictsSucceed } = useAllDistricts();
 
   const developersOptions: Option[] | undefined = useMemo(
     () =>
-      data?.map((d) => ({
+      developers?.map((d) => ({
         label: d.nameRu,
         value: d.id.toString(),
       })),
-    [data]
+    [developers]
+  );
+
+  const districtsOptions: Option[] | undefined = useMemo(
+    () =>
+      districts?.map((d) => ({
+        label: d.name,
+        value: d.id.toString(),
+      })),
+    [districts]
   );
 
   const onSubmit = useCallback(
     (data: z.infer<typeof FormSchema>) => {
-      console.log(data);
-      const developersIds = data.developers.map((d) => parseInt(d.value));
+      const developersIds =
+        data.developers?.map((d) => parseInt(d.value)) ?? [];
+      const districtsIds = data.districts?.map((d) => parseInt(d.value)) ?? [];
 
       applyFilters({
         developersIds: developersIds,
-        districtsIds: [],
+        districtsIds: districtsIds,
       });
     },
     [applyFilters]
   );
 
-  if (!isSuccess) return <Skeleton className="w-full h-5 rounded" />;
+  if (!areDevelopersSucceed) return <Skeleton className="w-full h-5 rounded" />;
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-        <FormField
-          control={form.control}
-          name="developers"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Застройщики</FormLabel>
-              <FormControl>
-                <MultipleSelector
-                  {...field}
-                  defaultOptions={developersOptions}
-                  placeholder="Выберите застройщиков"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {areDevelopersSucceed ? (
+          <FormField
+            control={form.control}
+            name="developers"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Застройщик</FormLabel>
+                <FormControl>
+                  <MultipleSelector
+                    {...field}
+                    defaultOptions={developersOptions}
+                    placeholder="Выберите застройщиков"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ) : (
+          <Skeleton className="w-full h-5 rounded" />
+        )}
+
+        {areDistrictsSucceed ? (
+          <FormField
+            control={form.control}
+            name="districts"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Район</FormLabel>
+                <FormControl>
+                  <MultipleSelector
+                    {...field}
+                    defaultOptions={districtsOptions}
+                    placeholder="Выберите район"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ) : (
+          <Skeleton className="w-full h-5 rounded" />
+        )}
+
         <Button type="submit" className="w-full">
           Применить
         </Button>
