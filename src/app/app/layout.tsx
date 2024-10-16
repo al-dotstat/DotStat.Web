@@ -4,15 +4,16 @@ import Link from "next/link";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <header className="">
-        <nav className="flex justify-between items-center p-2 container shadow rounded m-auto my-5 bg-background">
+    <div className="min-h-screen flex flex-col">
+      <div className="h-5" />
+      <header className="container shadow rounded mx-auto mb-5 bg-background">
+        <nav className="flex justify-between items-center p-2">
           <span>.stat</span>
           <AuthAvatar />
         </nav>
       </header>
       <div className="container m-auto mt-5">{children}</div>
-      <footer className="bg-background shadow p-5 m-5 rounded">
+      <footer className="bg-background shadow p-5 my-5 mx-auto rounded container self-end">
         <Link
           className="text-foreground flex gap-2 w-fit mx-auto"
           href="https://anemonlabs.ru"
@@ -27,6 +28,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
         </Link>
       </footer>
-    </>
+    </div>
   );
 }
