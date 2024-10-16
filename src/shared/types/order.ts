@@ -10,7 +10,12 @@ export type Order = {
   id: number;
   userId: number;
   items: OrderItem[];
+  fileName: string;
   fileExpiredDateTime: Date;
   createdDateTime: Date;
   updatedDateTime: Date;
+};
+
+export type OrderRequest = {
+  orderItems: OrderItem[];
 };

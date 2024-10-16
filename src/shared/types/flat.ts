@@ -1,3 +1,5 @@
+import { Status } from "./common";
+
 export type FlatDeclaration = {
   id: number;
   number: string;
@@ -24,6 +26,7 @@ export type FlatParsingInfo = {
   additionalJsonInfo?: string;
   price: number;
   date: Date;
+  status: Status;
   createdDateTime: Date;
   updatedDateTime: Date;
 };

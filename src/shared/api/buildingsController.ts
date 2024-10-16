@@ -1,15 +1,9 @@
 import { Building } from "../types/building";
+import { apiClient } from "./axios";
 
 const getBuilding = async (id: number) => {
-  const res: Building = {
-    id: id,
-    complexId: 1,
-    createdDateTime: new Date(),
-    updatedDateTime: new Date(),
-    name: "1-ая очередь",
-  };
-
-  return res;
+  const response = await apiClient.get<Building>(`/buildings/${id}`);
+  return response.data;
 };
 
 const buildingsController = {

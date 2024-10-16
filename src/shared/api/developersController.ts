@@ -1,55 +1,25 @@
+import { CollectionResponse } from "../types/common";
 import { Complex } from "../types/complex";
 import { Developer } from "../types/developer";
+import { apiClient } from "./axios";
 
 const getDeveloper = async (id: number) => {
-  const res: Developer = {
-    id: id,
-    name: "Grinvich",
-    nameRu: "Гринвич",
-    createdDateTime: new Date(),
-    updatedDateTime: new Date(),
-  };
-
-  return res;
+  const response = await apiClient.get<Developer>(`/developers/${id}`);
+  return response.data;
 };
 
 const getAllDevelopers = async () => {
-  const res: Developer[] = Array(2)
-    .fill(0)
-    .map((x, i) => ({
-      id: i,
-      name: ["Baza", "Grinvich"][i],
-      nameRu: ["База", "Гринвич"][i],
-      createdDateTime: new Date(),
-      updatedDateTime: new Date(),
-    }));
-
-  return res;
+  const response = await apiClient.get<CollectionResponse<Developer>>(
+    "/developers"
+  );
+  return response.data.Items;
 };
 
 const getDeveloperComplexes = async (id: number) => {
-  const res: Complex[] = Array(2)
-    .fill(0)
-    .map((x, i) => ({
-      id: i,
-      createdDateTime: new Date(),
-      updatedDateTime: new Date(),
-      name: "Novyi",
-      nameRu: "Новый",
-      developers: [
-        {
-          developerId: id,
-        },
-      ],
-      district: {
-        createdDateTime: new Date(),
-        id: 1,
-        name: "Свежий",
-        updatedDateTime: new Date(),
-      },
-    }));
-
-  return res;
+  const response = await apiClient.get<CollectionResponse<Complex>>(
+    `/developers/${id}/complexes`
+  );
+  return response.data.Items;
 };
 
 const developersController = {

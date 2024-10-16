@@ -1,117 +1,52 @@
 import { Building } from "../types/building";
+import { CollectionResponse } from "../types/common";
 import { Complex, ComplexFiltersParams } from "../types/complex";
 import { Developer } from "../types/developer";
+import { apiClient } from "./axios";
 
 const getComplex = async (id: number) => {
-  const res: Complex = {
-    id: id,
-    createdDateTime: new Date(),
-    updatedDateTime: new Date(),
-    name: "Novyi",
-    nameRu: "Новый",
-    developers: [
-      {
-        developerId: 1,
-      },
-    ],
-    district: {
-      createdDateTime: new Date(),
-      id: 1,
-      name: "Свежий",
-      updatedDateTime: new Date(),
-    },
-  };
-
-  return res;
+  const response = await apiClient.get<Complex>(`/complexes/${id}`);
+  return response.data;
 };
 
-export const getAllComplexes = async () => {
-  const res: Complex[] = Array(10)
-    .fill(0)
-    .map((x, i) => ({
-      id: i,
-      createdDateTime: new Date(),
-      updatedDateTime: new Date(),
-      name: "Novyi",
-      nameRu: "Новый",
-      developers: [
-        {
-          developerId: 1,
-        },
-        {
-          developerId: 2,
-        },
-      ],
-      district: {
-        createdDateTime: new Date(),
-        id: 1,
-        name: "Свежий",
-        updatedDateTime: new Date(),
-      },
-    }));
-
-  return res;
+const getAllComplexes = async () => {
+  const response = await apiClient.get<CollectionResponse<Complex>>(
+    "/complexes"
+  );
+  return response.data.Items;
 };
 
-export const getComplexBuildings = async (id: number) => {
-  const res: Building[] = Array(3)
-    .fill(0)
-    .map((x, i) => ({
-      id: i,
-      complexId: id,
-      createdDateTime: new Date(),
-      updatedDateTime: new Date(),
-      name: i + "-ая очередь",
-    }));
+const searchComplexes = async (params: ComplexFiltersParams) => {
+  const response = await apiClient.get<CollectionResponse<Complex>>(
+    "/complexes/search",
+    {
+      params: params,
+    }
+  );
 
-  return res;
+  return response.data.Items;
 };
 
-export const getComplexDevelopers = async (id: number) => {
-  const res: Developer[] = Array(2)
-    .fill(0)
-    .map((x, i) => ({
-      id: i,
-      name: ["Baza", "Grinvich"][i],
-      nameRu: ["База", "Гринвич"][i],
-      createdDateTime: new Date(),
-      updatedDateTime: new Date(),
-    }));
-
-  return res;
+const getComplexBuildings = async (id: number) => {
+  const response = await apiClient.get<CollectionResponse<Building>>(
+    `/complexes/${id}/buildings`
+  );
+  return response.data.Items;
 };
 
-export const searchComplexes = async (data: ComplexFiltersParams) => {
-  const res: Complex[] = Array(3)
-    .fill(0)
-    .map((x, i) => ({
-      id: i,
-      createdDateTime: new Date(),
-      updatedDateTime: new Date(),
-      name: ["a", "b", "c"][i],
-      nameRu: [data.search ?? "Эксклюзивный", "Новый", "Старый"][i],
-      developers: [
-        {
-          developerId: data.developersIds ? data.developersIds[0] : 1,
-        },
-      ],
-      district: {
-        createdDateTime: new Date(),
-        id: data.developersIds ? data.developersIds[0] : 1,
-        name: "Свежий",
-        updatedDateTime: new Date(),
-      },
-    }));
-
-  return res;
+const getComplexDevelopers = async (id: number) => {
+  const response = await apiClient.get<CollectionResponse<Developer>>(
+    `/complexes/${id}/developers`
+  );
+  return response.data.Items;
 };
 
 const complexesController = {
   getComplex,
   getAllComplexes,
+  searchComplexes,
   getComplexBuildings,
   getComplexDevelopers,
-  searchComplexes,
 };
 
 export default complexesController;
