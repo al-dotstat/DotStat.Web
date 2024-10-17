@@ -17,7 +17,11 @@ const Providers: React.FC<PropsWithChildren> = ({ children }) => {
       queryCache: new QueryCache({
         onError: (err) => {
           if (axios.isAxiosError(err)) {
-            if (err.response?.status === 401) router.push("/auth");
+            console.log(err.response?.status);
+            if (err.response?.status === 401)
+              router.push(
+                `/auth?redirectTo=${encodeURIComponent(window.location.href)}`
+              );
             else if (err.response && err.response?.status >= 500)
               toast.error("Сервер не смог обработать запрос");
           } else {
@@ -29,6 +33,12 @@ const Providers: React.FC<PropsWithChildren> = ({ children }) => {
         queries: {
           staleTime: 1000 * 60 * 5,
           retry: (count, error) => {
+            if (
+              axios.isAxiosError(error) &&
+              error.response &&
+              error.response.status < 500
+            )
+              return false;
             if (count >= 3) return false;
             if (!axios.isAxiosError(error) || !error.response) return true;
 

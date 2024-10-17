@@ -86,7 +86,7 @@ apiClient.interceptors.response.use(
           })
           .catch((err) => {
             processQueue(err, null);
-            reject(err);
+            reject(error);
           })
           .finally(() => {
             isRefreshing = false;

@@ -11,7 +11,7 @@ export default function AuthModalPage() {
     <Modal
       isOpen={true}
       onOpenChange={(val) => {
-        !val && router.back();
+        if (!val) router.back();
       }}
     >
       <AuthWindow />
