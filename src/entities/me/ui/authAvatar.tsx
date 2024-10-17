@@ -22,11 +22,13 @@ const AuthAvatar: React.FC = () => {
     );
 
   return (
-    <Button variant="ghost" className="h-12 w-12 p-0">
-      <div className="h-8 w-8 rounded-full border flex items-center justify-center">
-        {data.firstName[0].toUpperCase()}
-      </div>
-    </Button>
+    <Link href="/app/profile">
+      <Button variant="outline" className="rounded-full" size="icon">
+        <div className="h-8 w-8 flex items-center justify-center">
+          {data.firstName[0].toUpperCase()}
+        </div>
+      </Button>
+    </Link>
   );
 };
 
