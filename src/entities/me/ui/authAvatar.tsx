@@ -10,7 +10,7 @@ import { Button } from "@/shared/ui/button";
 const AuthAvatar: React.FC = () => {
   const { data, isSuccess, isLoading } = useAuthUser();
 
-  if (isLoading) return <Skeleton className="rounded-full w-10 h-10" />;
+  if (isLoading) return <Skeleton className="rounded-full w-8 h-8" />;
   if (!isSuccess)
     return (
       <Button asChild>
