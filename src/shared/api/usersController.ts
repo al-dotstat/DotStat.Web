@@ -48,8 +48,15 @@ const logoutUser = async (data: RefreshRequest) => {
 };
 
 const changePassword = async (data: PasswordRequest) => {
-  const response = await apiClient.put<Tokens>("/users/password", data);
-  return response.data;
+  const response = await apiClient.put<AuthenticationResponse>(
+    "/users/password",
+    data
+  );
+  apiClient.setAuth(
+    response.data.tokens.token,
+    response.data.tokens.refreshToken
+  );
+  return response.data.user;
 };
 
 const usersController = {
