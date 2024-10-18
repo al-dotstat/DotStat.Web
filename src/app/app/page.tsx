@@ -1,5 +1,6 @@
-import { ComplexFilters, ComplexList } from "@/entities/complex";
+import { ComplexFilters } from "@/features/filters";
 import Block from "@/shared/ui/block";
+import { FilteredComplexList } from "@/widgets/complex";
 
 export default function AppPage() {
   return (
@@ -12,7 +13,7 @@ export default function AppPage() {
 
       <main className="w-full">
         <h1 className="font-semibold text-2xl">Список жилых комплексов</h1>
-        <ComplexList />
+        <FilteredComplexList />
       </main>
     </div>
   );

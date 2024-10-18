@@ -16,8 +16,8 @@ import {
   FormMessage,
 } from "@/shared/ui/form";
 import { Button } from "@/shared/ui/button";
-import useComplexFiltersStore from "../model/complexFiltersStore";
 import { useAllDistricts } from "@/entities/district";
+import useComplexFiltersStore from "../model/complexFiltersStore";
 
 const optionSchema = z.object({
   label: z.string(),
