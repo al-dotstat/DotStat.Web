@@ -1,4 +1,4 @@
-import { BasketList } from "@/features/order";
+import { BasketList, CreateOrder } from "@/features/order";
 import { Button } from "@/shared/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { IconBasket } from "@tabler/icons-react";
@@ -14,8 +14,11 @@ const Basket: React.FC<BasketProps> = ({}) => {
           <IconBasket />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto max-w-96 max-h-[50vh]">
-        <BasketList />
+      <PopoverContent className="w-auto max-w-96 space-y-2">
+        <CreateOrder />
+        <div className="max-h-[50vh] overflow-y-auto">
+          <BasketList />
+        </div>
       </PopoverContent>
     </Popover>
   );

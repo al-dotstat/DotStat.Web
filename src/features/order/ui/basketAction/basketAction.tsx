@@ -20,6 +20,7 @@ const BasketAction: React.FC<BasketActionProps> = ({ complex }) => {
   const storeComplex = useComplexBasketStore((state) =>
     state.complexes.find((c) => c.complex.id === complex.id)
   );
+  const isPending = useComplexBasketStore((state) => state.isPending);
   const addToBasket = useComplexBasketStore((state) => state.addToBasket);
   const removeFromBasket = useComplexBasketStore(
     (state) => state.removeFromBasket
@@ -46,6 +47,7 @@ const BasketAction: React.FC<BasketActionProps> = ({ complex }) => {
         variant="outline"
         onClick={addRemove}
         className="hover:text-green-400"
+        disabled={isPending}
       >
         <IconBasket />
       </Button>
@@ -60,6 +62,7 @@ const BasketAction: React.FC<BasketActionProps> = ({ complex }) => {
           variant="ghost"
           onClick={addRemove}
           className="hover:bg-destructive hover:text-destructive-foreground group"
+          disabled={isPending}
         >
           <IconBasket className="group-hover:hidden" />
           <IconBasketOff className="hidden group-hover:block" />

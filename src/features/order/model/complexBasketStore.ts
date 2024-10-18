@@ -15,6 +15,7 @@ export type BasketComplex = {
 
 type State = {
   complexes: BasketComplex[];
+  isPending: boolean;
 };
 
 type Action = {
@@ -22,6 +23,7 @@ type Action = {
   removeFromBasket: (id: BasketComplex["complex"]["id"]) => void;
   clearBasket: () => void;
   updateComplex: (complex: BasketComplex) => void;
+  setPending: (pending: boolean) => void;
 };
 
 export type ComplexBasket = State & Action;
@@ -31,6 +33,8 @@ const useComplexBasketStore = create<ComplexBasket>()(
     persist(
       (set) => ({
         complexes: [],
+        isPending: false,
+        setPending: (pending) => set(() => ({ isPending: pending })),
         addToBasket: (complex) =>
           set((state) => ({ complexes: [complex, ...state.complexes] })),
         removeFromBasket: (id) =>

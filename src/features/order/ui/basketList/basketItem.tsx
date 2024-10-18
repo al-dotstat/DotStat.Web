@@ -26,6 +26,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ complexId }) => {
   );
   if (!basketComplex)
     throw new Error(`This complex is not in the basket (${complexId})`);
+  const isPending = useComplexBasketStore((state) => state.isPending);
   const updateInBasket = useComplexBasketStore((state) => state.updateComplex);
   const removeFromBasket = useComplexBasketStore(
     (state) => state.removeFromBasket
@@ -66,6 +67,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ complexId }) => {
               onPressedChange={(checked) =>
                 handleInclude("includeFlats", !!checked)
               }
+              disabled={isPending}
               size="sm"
               className="data-[state=on]:bg-green-400/25"
             >
@@ -84,6 +86,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ complexId }) => {
               onPressedChange={(checked) =>
                 handleInclude("includeParkings", !!checked)
               }
+              disabled={isPending}
               size="sm"
               className="data-[state=on]:bg-green-400/25"
             >
@@ -102,6 +105,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ complexId }) => {
               onPressedChange={(checked) =>
                 handleInclude("includeStorages", !!checked)
               }
+              disabled={isPending}
               size="sm"
               className="data-[state=on]:bg-green-400/25"
             >
@@ -120,6 +124,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ complexId }) => {
               onPressedChange={(checked) =>
                 handleInclude("includeCommercials", !!checked)
               }
+              disabled={isPending}
               size="sm"
               className="data-[state=on]:bg-green-400/25"
             >
@@ -135,6 +140,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ complexId }) => {
           variant="ghost"
           className="text-destructive hover:bg-destructive hover:text-destructive-foreground"
           onClick={() => removeFromBasket(basketComplex.complex.id)}
+          disabled={isPending}
         >
           <IconSquareX />
         </Button>

@@ -2,7 +2,11 @@ import ordersController from "@/shared/api/ordersController";
 import { orderKeys } from "@/shared/lib/queryKeyFactory";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const useCreateOrder = () => {
+const useCreateOrder = (
+  onSuccess?: (
+    data: Awaited<ReturnType<typeof ordersController.createOrder>>
+  ) => void
+) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ordersController.createOrder,
@@ -11,6 +15,7 @@ const useCreateOrder = () => {
       queryClient.invalidateQueries({
         queryKey: orderKeys.history(),
       });
+      if (onSuccess) onSuccess(data);
     },
   });
 };

@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useComplexBasketStore } from "../..";
 import { Complex } from "@/shared/types/complex";
 import { BasketComplex } from "../../model/complexBasketStore";
 import { Switch } from "@/shared/ui/switch";
 import { Label } from "@/shared/ui/label";
+import toast from "react-hot-toast";
 
 export interface ComplexBasketCardProps {
   complex: Complex;
@@ -18,7 +19,7 @@ const ComplexBasketCard: React.FC<ComplexBasketCardProps> = ({ complex }) => {
   if (!basketComplex)
     throw new Error(`This complex is not in the basket (${complex.id})`);
   const updateInBasket = useComplexBasketStore((state) => state.updateComplex);
-  const [error, setError] = useState("");
+  const isPending = useComplexBasketStore((state) => state.isPending);
 
   const handleInclude = (
     field:
@@ -35,9 +36,8 @@ const ComplexBasketCard: React.FC<ComplexBasketCardProps> = ({ complex }) => {
       !checked &&
       basketVariables.every((x) => !basketComplex[x as keyof BasketComplex])
     ) {
-      setError("Необходимо выбрать хотя бы один из полей");
+      toast.error("Необходимо выбрать хотя бы один из полей");
     } else {
-      setError("");
       updateInBasket({
         ...basketComplex,
         [field]: checked,
@@ -51,6 +51,7 @@ const ComplexBasketCard: React.FC<ComplexBasketCardProps> = ({ complex }) => {
         <Switch
           id={`${complex.id}_parse_includeFlats`}
           checked={basketComplex.includeFlats}
+          disabled={isPending}
           onCheckedChange={(checked) =>
             handleInclude("includeFlats", !!checked)
           }
@@ -61,6 +62,7 @@ const ComplexBasketCard: React.FC<ComplexBasketCardProps> = ({ complex }) => {
         <Switch
           id={`${complex.id}_parse_includeParkings`}
           checked={basketComplex.includeParkings}
+          disabled={isPending}
           onCheckedChange={(checked) =>
             handleInclude("includeParkings", !!checked)
           }
@@ -71,6 +73,7 @@ const ComplexBasketCard: React.FC<ComplexBasketCardProps> = ({ complex }) => {
         <Switch
           id={`${complex.id}_parse_includeStorages`}
           checked={basketComplex.includeStorages}
+          disabled={isPending}
           onCheckedChange={(checked) =>
             handleInclude("includeStorages", !!checked)
           }
@@ -81,6 +84,7 @@ const ComplexBasketCard: React.FC<ComplexBasketCardProps> = ({ complex }) => {
         <Switch
           id={`${complex.id}_parse_includeCommercials`}
           checked={basketComplex.includeCommercials}
+          disabled={isPending}
           onCheckedChange={(checked) =>
             handleInclude("includeCommercials", !!checked)
           }
@@ -89,7 +93,6 @@ const ComplexBasketCard: React.FC<ComplexBasketCardProps> = ({ complex }) => {
           Коммерция
         </Label>
       </div>
-      {error && <p className="text-destructive">{error}</p>}
     </div>
   );
 };
