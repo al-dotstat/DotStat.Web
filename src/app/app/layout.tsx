@@ -1,15 +1,17 @@
 import { AuthAvatar } from "@/entities/me";
 import ALIcon from "@/shared/ui/icon/alIcon";
+import LogoIcon from "@/shared/ui/icon/logoIcon";
 import { Basket } from "@/widgets/basket";
 import Link from "next/link";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="h-5" />
-      <header className="container shadow rounded mx-auto mb-5 bg-background">
-        <nav className="flex justify-between items-center p-2">
-          <span>.stat</span>
+      <header className="sticky top-5 container shadow rounded mx-auto mb-5 bg-background z-30">
+        <nav className="flex justify-between items-center h-16 p-2">
+          <Link href="/app" className="flex items-end">
+            <LogoIcon size={50} />
+          </Link>
           <div className="flex gap-2 items-center">
             <Basket />
             <AuthAvatar />
