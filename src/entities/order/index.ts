@@ -1,2 +1,2 @@
 export * from "./hooks";
-export * from "./ui/orderHistory";
+export { default as OrderHistoryItem } from "./ui/orderHistoryItem";

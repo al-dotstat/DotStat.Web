@@ -1,5 +1,5 @@
-import { OrderHistory } from "@/entities/order";
 import Block from "@/shared/ui/block";
+import { OrderHistory } from "@/widgets/order";
 import { ProfileCard } from "@/widgets/user";
 
 export default function ProfilePage() {

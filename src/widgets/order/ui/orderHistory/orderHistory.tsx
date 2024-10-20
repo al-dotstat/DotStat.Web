@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { useOrderHistory } from "../../hooks";
 import { Skeleton } from "@/shared/ui/skeleton";
-import OrderHistoryItem from "./orderHistoryItem";
+import { OrderHistoryItem, useOrderHistory } from "@/entities/order";
+import { Reorder } from "@/features/order";
 
 export interface OrderHistoryProps {}
 
@@ -31,7 +31,11 @@ const OrderHistory: React.FC<OrderHistoryProps> = ({}) => {
             new Date(a.createdDateTime).getTime()
         )
         .map((o) => (
-          <OrderHistoryItem order={o} key={o.id} />
+          <OrderHistoryItem
+            order={o}
+            key={o.id}
+            actions={<Reorder order={o} />}
+          />
         ))}
     </div>
   );
