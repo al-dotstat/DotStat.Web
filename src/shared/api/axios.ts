@@ -7,7 +7,8 @@ declare module "axios" {
     removeAuth: () => void;
     getToken: () => string | null;
     getRefreshToken: () => string | null;
-    downloadStaticFile: (fileName: string) => void;
+    downloadStaticFile: (fileName: string) => Promise<void>;
+    downloadFile: (url: string, params?: unknown) => Promise<void>;
   }
 }
 
@@ -32,29 +33,33 @@ export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL + "api",
 });
 
-apiClient.downloadStaticFile = (fileName) => {
-  axios
-    .get(process.env.NEXT_PUBLIC_API_URL + "StaticFiles/" + fileName, {
+apiClient.downloadFile = (url, params) =>
+  apiClient
+    .get(process.env.NEXT_PUBLIC_API_URL + url, {
       responseType: "blob",
+      params: params,
     })
     .then((response) => {
-      if (response.status === 200) {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", fileName);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      } else {
-        console.error("Error: Received non-200 status code");
-      }
-    })
-    .catch((error) => {
-      console.error("Error downloading the image:", error);
+      const headerLine = response.headers["content-disposition"] as string;
+      console.log(headerLine);
+      const startFileNameIndex = headerLine.indexOf("filename=") + 9;
+      const endFileNameIndex = headerLine.indexOf(";", startFileNameIndex);
+      const filename = headerLine.substring(
+        startFileNameIndex,
+        endFileNameIndex
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
     });
-};
+
+apiClient.downloadStaticFile = (fileName) =>
+  apiClient.downloadFile("StaticFiles/" + fileName);
 
 apiClient.setAuth = (token: string, refreshToken: string) => {
   apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;

@@ -44,7 +44,7 @@ const BasketAction: React.FC<BasketActionProps> = ({ complex }) => {
     return (
       <Button
         size="icon"
-        variant="outline"
+        variant="ghost"
         onClick={addRemove}
         className="hover:text-green-400"
         disabled={isPending}
@@ -61,7 +61,7 @@ const BasketAction: React.FC<BasketActionProps> = ({ complex }) => {
           size="icon"
           variant="ghost"
           onClick={addRemove}
-          className="hover:bg-destructive hover:text-destructive-foreground group"
+          className="bg-green-400/20 hover:bg-destructive hover:text-destructive-foreground group"
           disabled={isPending}
         >
           <IconBasket className="group-hover:hidden" />

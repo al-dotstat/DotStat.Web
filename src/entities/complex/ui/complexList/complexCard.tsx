@@ -5,6 +5,7 @@ import { District } from "@/shared/types/district";
 import Block from "@/shared/ui/block";
 import Image from "next/image";
 import React from "react";
+import { complexParams } from "../../utils/complexParams";
 
 export interface ComplexListItemProps {
   complex: Complex;
@@ -21,18 +22,7 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
   action,
   active,
 }) => {
-  const params: { [key: string]: string | React.ReactNode } = {};
-  if (complex.address) params["Адрес"] = complex.address;
-  if (complex.area)
-    params["Площадь"] = (
-      <>
-        {complex.area.toString()} м<sup>2</sup>
-      </>
-    );
-  if (complex.completionDate)
-    params["Дата сдачи"] = new Date(
-      complex.completionDate
-    ).toLocaleDateString();
+  const params = complexParams(complex);
 
   return (
     <Block className={"grid grid-cols-[auto_1fr_auto_auto]"}>
