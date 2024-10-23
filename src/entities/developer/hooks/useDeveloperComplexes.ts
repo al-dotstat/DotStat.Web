@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useDeveloperComplexes = (id: number) => {
   return useQuery({
-    queryKey: developerKeys.detail(id),
+    queryKey: developerKeys.complexes(id),
     queryFn: () => developersController.getDeveloperComplexes(id),
   });
 };
