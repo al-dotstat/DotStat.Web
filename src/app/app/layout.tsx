@@ -1,5 +1,6 @@
 import { AuthAvatar } from "@/entities/me";
 import ALIcon from "@/shared/ui/icon/alIcon";
+import { SearchWidget } from "@/widgets/search";
 import Link from "next/link";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -9,6 +10,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <header className="container shadow rounded mx-auto mb-5 bg-background">
         <nav className="flex justify-between items-center p-2">
           <span>.stat</span>
+          <div className="max-w-80 w-full">
+            <SearchWidget />
+          </div>
           <AuthAvatar />
         </nav>
       </header>
