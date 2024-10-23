@@ -1,5 +1,6 @@
 "use client";
 
+import { TooltipProvider } from "@/shared/ui/tooltip";
 import {
   QueryCache,
   QueryClient,
@@ -57,7 +58,9 @@ const Providers: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Toaster position="top-right" />
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>{children}</TooltipProvider>
+      </QueryClientProvider>
     </>
   );
 };

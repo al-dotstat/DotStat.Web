@@ -1,36 +1,31 @@
+import { cn } from "@/shared/lib/utils";
 import { Complex } from "@/shared/types/complex";
 import { Developer } from "@/shared/types/developer";
 import { District } from "@/shared/types/district";
 import Block from "@/shared/ui/block";
 import Image from "next/image";
 import React from "react";
+import { complexParams } from "../../utils/complexParams";
 
 export interface ComplexListItemProps {
   complex: Complex;
   district: District;
   developers: Developer[];
+  action?: React.ReactNode;
+  active?: boolean;
 }
 
-const ComplexListItem: React.FC<ComplexListItemProps> = ({
+const ComplexCard: React.FC<ComplexListItemProps> = ({
   complex,
   district,
   developers,
+  action,
+  active,
 }) => {
-  const params: { [key: string]: string | React.ReactNode } = {};
-  if (complex.address) params["Адрес"] = complex.address;
-  if (complex.area)
-    params["Площадь"] = (
-      <>
-        {complex.area.toString()} м<sup>2</sup>
-      </>
-    );
-  if (complex.completionDate)
-    params["Дата сдачи"] = new Date(
-      complex.completionDate
-    ).toLocaleDateString();
+  const params = complexParams(complex);
 
   return (
-    <Block className="grid grid-cols-[auto_1fr_auto]">
+    <Block className={"grid grid-cols-[auto_1fr_auto_auto]"}>
       <div className="flex items-center w-auto">
         <Image
           alt={complex.nameRu}
@@ -57,22 +52,29 @@ const ComplexListItem: React.FC<ComplexListItemProps> = ({
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 p-2 items-center">
         {developers.map((developer) => (
           <div key={developer.id} className="text-center">
             <Image
               alt={developer.nameRu}
               src={"/placeholder.png"}
-              width={100}
-              height={100}
+              width={80}
+              height={80}
               className="max-w-28 aspect-square"
             />
             <p className="text-sm font-semibold mt-1">{developer.nameRu}</p>
           </div>
         ))}
       </div>
+      <div
+        className={cn("p-2 flex h-full items-center transition-colors", {
+          "bg-green-400/25": active,
+        })}
+      >
+        {action}
+      </div>
     </Block>
   );
 };
 
-export default React.memo(ComplexListItem);
+export default React.memo(ComplexCard);

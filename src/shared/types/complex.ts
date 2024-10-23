@@ -23,3 +23,10 @@ export type ComplexFiltersParams = {
   districtsIds?: number[];
   search?: string;
 };
+
+export type ComplexParseParams = {
+  includeFlats: boolean;
+  includeParkings: boolean;
+  includeStorages: boolean;
+  includeCommercials: boolean;
+};
