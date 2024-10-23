@@ -1,5 +1,6 @@
 "use client";
 
+import { ComplexList } from "@/entities/complex";
 import { DeveloperList } from "@/entities/developer";
 import { useSearch } from "@/entities/search";
 import { Search } from "@/features/search";
@@ -40,17 +41,18 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({}) => {
       />
       <Block
         className={cn(
-          "max-w-[90vw] absolute top-[calc(100%+1.25rem)] left-1/2 -translate-x-1/2 z-20 p-5",
+          "absolute top-[calc(100%+1.25rem)] left-1/2 -translate-x-1/2 z-20 p-5 border w-[1000px] max-h-[calc(100vh-300px)] overflow-y-auto",
           {
             hidden: !open,
           }
         )}
       >
-        <div className="max-w-[800px] min-w-36">
-          {data && data.developers.length > 0 && (
-            <DeveloperList items={data.developers} />
-          )}
-        </div>
+        {data && data.developers.length > 0 && (
+          <DeveloperList items={data.developers} />
+        )}
+        {data && data.complexes.length > 0 && (
+          <ComplexList complexes={data.complexes} />
+        )}
       </Block>
     </div>
   );
