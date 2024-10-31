@@ -29,8 +29,6 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({}) => {
     }
   }, [data, focus]);
 
-  console.log(open, focus, data);
-
   return (
     <div className="relative w-full">
       <Search
@@ -39,21 +37,25 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({}) => {
         onBlur={() => setFocus(false)}
         ref={searchRef}
       />
-      <Block
+      <div
         className={cn(
-          "absolute top-[calc(100%+1.25rem)] left-1/2 -translate-x-1/2 z-20 p-5 border w-[1000px] max-h-[calc(100vh-300px)] overflow-y-auto",
+          "rounded bg-background shadow absolute top-[calc(100%+1.25rem)] left-1/2 -translate-x-1/2 z-20 p-5 border w-[1000px] max-h-[calc(100vh-300px)] overflow-y-auto",
           {
             hidden: !open,
           }
         )}
       >
         {data && data.developers.length > 0 && (
-          <DeveloperList items={data.developers} />
+          <Block>
+            <DeveloperList items={data.developers} />
+          </Block>
         )}
         {data && data.complexes.length > 0 && (
-          <ComplexList complexes={data.complexes} />
+          <div className="mt-5">
+            <ComplexList complexes={data.complexes} />
+          </div>
         )}
-      </Block>
+      </div>
     </div>
   );
 };

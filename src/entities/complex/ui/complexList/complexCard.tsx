@@ -2,7 +2,6 @@ import { cn } from "@/shared/lib/utils";
 import { Complex } from "@/shared/types/complex";
 import { Developer } from "@/shared/types/developer";
 import { District } from "@/shared/types/district";
-import Block from "@/shared/ui/block";
 import Image from "next/image";
 import React from "react";
 import { complexParams } from "../../utils/complexParams";
@@ -25,7 +24,7 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
   const params = complexParams(complex);
 
   return (
-    <Block className={"grid grid-cols-[auto_1fr_auto_auto]"}>
+    <div className={"grid grid-cols-[auto_1fr_auto_auto]"}>
       <div className="flex items-center w-auto">
         <Image
           alt={complex.nameRu}
@@ -68,12 +67,12 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
       </div>
       <div
         className={cn("p-2 flex h-full items-center transition-colors", {
-          "bg-green-400/25": active,
+          "bg-green-400/25 rounded": active,
         })}
       >
         {action}
       </div>
-    </Block>
+    </div>
   );
 };
 

@@ -14,7 +14,7 @@ const Block = React.forwardRef<HTMLElement, BlockProps & SlotProps>(
     return (
       <Comp
         className={cn(
-          "shadow rounded bg-background",
+          "rounded bg-zinc-50 p-10",
           {
             border: border,
           },

@@ -6,6 +6,7 @@ import { useAllDistricts } from "@/entities/district";
 import { useAllDevelopers } from "@/entities/developer";
 import { Complex } from "@/shared/types/complex";
 import ComplexListSkeleton from "./complexListSkeleton";
+import { Separator } from "@/shared/ui/separator";
 
 export interface ComplexListProps {
   complexes: Complex[];
@@ -21,16 +22,19 @@ const ComplexList: React.FC<ComplexListProps> = ({ complexes }) => {
 
   return (
     <div className="flex flex-col gap-5">
-      {complexes.map((c) => (
-        <ComplexCard
-          complex={c}
-          district={districts.find((d) => d.id == c.districtId)!}
-          developers={developers.filter((d) =>
-            c.developers.some((cd) => cd.developerId === d.id)
-          )}
-          key={c.id}
-        />
-      ))}
+      {complexes
+        .flatMap((c) => [
+          <Separator key={"separator" + c.id} />,
+          <ComplexCard
+            complex={c}
+            district={districts.find((d) => d.id == c.districtId)!}
+            developers={developers.filter((d) =>
+              c.developers.some((cd) => cd.developerId === d.id)
+            )}
+            key={c.id}
+          />,
+        ])
+        .slice(1)}
       {complexes.length === 0 && (
         <span className="text-foreground/75 italic text-center mt-5">
           Кажется, ничего не нашлось :(

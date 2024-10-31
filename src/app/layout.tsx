@@ -19,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="">
-      <body
-        className={`${roboto.className} antialiased bg-zinc-50 dark:bg-zinc-900`}
-      >
+      <body className={`${roboto.className} antialiased dark:bg-zinc-900`}>
         <Providers>{children}</Providers>
       </body>
     </html>

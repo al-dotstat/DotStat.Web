@@ -1,3 +1,4 @@
+import twAnimate from "tailwindcss-animate";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -48,12 +49,14 @@ const config: Config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
+        DEFAULT: "var(--radius)",
+        lg: "calc(var(--radius) + 4px)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+
+  plugins: [twAnimate],
 };
 export default config;

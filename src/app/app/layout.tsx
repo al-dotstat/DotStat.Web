@@ -23,15 +23,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </nav>
       </header>
       <div className="container m-auto mt-5">{children}</div>
-      <footer className="bg-background shadow p-5 my-5 mx-auto rounded container self-end">
+      <footer className="bg-foreground text-background shadow p-10 my-5 mx-auto rounded container self-end">
         <Link
-          className="text-foreground flex gap-2 w-fit mx-auto"
+          className="flex gap-2 w-fit mx-auto"
           href="https://anemonlabs.ru"
           target="_blank"
         >
-          <ALIcon size={30} />
+          <ALIcon size={30} color="null" className="fill-background" />
           <div className="flex flex-col">
-            <span className="text-sm text-foreground/75 leading-none">
+            <span className="text-sm text-background/75 leading-none">
               сайт сделал
             </span>
             <span className="text-md leading-none">AnemonLabs</span>

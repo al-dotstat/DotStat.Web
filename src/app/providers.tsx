@@ -18,7 +18,6 @@ const Providers: React.FC<PropsWithChildren> = ({ children }) => {
       queryCache: new QueryCache({
         onError: (err) => {
           if (axios.isAxiosError(err)) {
-            console.log(err.response?.status);
             if (err.response?.status === 401)
               router.push(
                 `/auth?redirectTo=${encodeURIComponent(window.location.href)}`
