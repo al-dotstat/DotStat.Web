@@ -9,3 +9,9 @@ export type Parse = {
   createdDateTime: string;
   updatedDateTime: string;
 };
+
+export type QueueComplex = {
+  queueItemId: number;
+  complexId: number;
+  createdDateTime: string;
+};

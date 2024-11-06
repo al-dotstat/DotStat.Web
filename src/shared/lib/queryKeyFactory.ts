@@ -53,3 +53,8 @@ export const searchKeys = {
   all: ["search"] as const,
   search: (search: string) => [...searchKeys.all, search] as const,
 };
+
+export const parseKeys = {
+  all: ["parse"] as const,
+  queue: () => [...parseKeys.all, "queue"] as const,
+};

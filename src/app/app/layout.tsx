@@ -1,9 +1,9 @@
 import { AuthAvatar } from "@/entities/me";
-import ALIcon from "@/shared/ui/icon/alIcon";
 import { SearchWidget } from "@/widgets/search";
 import LogoIcon from "@/shared/ui/icon/logoIcon";
 import { Basket } from "@/widgets/basket";
 import Link from "next/link";
+import { Footer } from "@/shared/ui/layout";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,21 +23,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </nav>
       </header>
       <div className="container m-auto mt-5">{children}</div>
-      <footer className="bg-foreground text-background shadow p-10 my-5 mx-auto rounded container self-end">
-        <Link
-          className="flex gap-2 w-fit mx-auto"
-          href="https://anemonlabs.ru"
-          target="_blank"
-        >
-          <ALIcon size={30} color="null" className="fill-background" />
-          <div className="flex flex-col">
-            <span className="text-sm text-background/75 leading-none">
-              сайт сделал
-            </span>
-            <span className="text-md leading-none">AnemonLabs</span>
-          </div>
-        </Link>
-      </footer>
+      <Footer />
     </div>
   );
 }
