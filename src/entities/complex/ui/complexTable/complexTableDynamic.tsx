@@ -13,7 +13,11 @@ const ComplexTableDynamic: React.FC<ComplexTableProps> = ({ id }) => {
   const [open, setOpen] = useState(false);
 
   if (!open) {
-    return <Button onClick={() => setOpen(true)}>Загрузить таблицу</Button>;
+    return (
+      <div className="mx-auto w-fit">
+        <Button onClick={() => setOpen(true)}>Загрузить таблицу</Button>
+      </div>
+    );
   }
 
   return <ComplexTable id={id} />;

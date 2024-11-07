@@ -6,7 +6,7 @@ import { Button } from "@/shared/ui/button";
 import { Label } from "@/shared/ui/label";
 import Modal from "@/shared/ui/modal";
 import { Switch } from "@/shared/ui/switch";
-import { IconLoader } from "@tabler/icons-react";
+import { IconDownload, IconLoader } from "@tabler/icons-react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -43,9 +43,8 @@ const ParseComplex: React.FC<ParseComplexProps> = ({ id }) => {
 
   return (
     <>
-      <Button variant="outline" onClick={() => setOpen(true)}>
-        {isPending && <IconLoader className="animate-spin" />}
-        Парсинг
+      <Button variant="ghost" size="icon" onClick={() => setOpen(true)}>
+        {isPending ? <IconLoader className="animate-spin" /> : <IconDownload />}
       </Button>
       <Modal
         isOpen={open}

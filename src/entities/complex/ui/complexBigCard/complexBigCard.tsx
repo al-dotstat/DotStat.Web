@@ -32,7 +32,9 @@ const ComplexBigCard: React.FC<ComplexBigCardProps> = ({
           width={200}
           height={200}
         />
-        <div className="flex gap-2 flex-wrap items-center">{actions}</div>
+        <div className="flex gap-2 flex-wrap items-center justify-center">
+          {actions}
+        </div>
         <div className="flex gap-2 flex-wrap items-start">
           {developers.map((developer) => (
             <div className="flex flex-col items-center" key={developer.id}>

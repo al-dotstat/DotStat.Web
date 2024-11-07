@@ -73,7 +73,7 @@ const ComplexTable: React.FC<ComplexTableProps> = ({ id }) => {
           : undefined
       }
     >
-      <TabsList>
+      <TabsList className="block w-fit mx-auto">
         {isFlatsData && <TabsTrigger value="flats">Квартиры</TabsTrigger>}
         {isParkingsData && <TabsTrigger value="parkings">Паркинг</TabsTrigger>}
         {isStoragesData && <TabsTrigger value="storages">Кладовые</TabsTrigger>}

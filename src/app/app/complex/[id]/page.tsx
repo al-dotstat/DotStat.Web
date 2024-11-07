@@ -8,13 +8,13 @@ export default function Page({ params }: { params: { id: string } }) {
   if (isNaN(idInt)) notFound();
 
   return (
-    <>
+    <div className="space-y-5">
       <Block asChild>
         <main className="p-5">
           <ComplexBigCardOrdered id={idInt} />
         </main>
       </Block>
       <ComplexTableDynamic id={idInt} />
-    </>
+    </div>
   );
 }
