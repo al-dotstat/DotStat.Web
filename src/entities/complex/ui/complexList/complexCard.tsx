@@ -5,6 +5,7 @@ import { District } from "@/shared/types/district";
 import Image from "next/image";
 import React from "react";
 import { complexParams } from "../../utils/complexParams";
+import Link from "next/link";
 
 export interface ComplexListItemProps {
   complex: Complex;
@@ -26,16 +27,20 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
   return (
     <div className={"grid grid-cols-[auto_1fr_auto_auto]"}>
       <div className="flex items-center w-auto">
-        <Image
-          alt={complex.nameRu}
-          src={"/placeholder.png"}
-          width={200}
-          height={200}
-          className="max-w-48 aspect-square"
-        />
+        <Link href={`/app/complex/${complex.id}`}>
+          <Image
+            alt={complex.nameRu}
+            src={"/placeholder.png"}
+            width={200}
+            height={200}
+            className="max-w-48 aspect-square"
+          />
+        </Link>
       </div>
       <div className="space-y-2 py-2">
-        <h2 className="text-primary font-bold text-xl">{complex.nameRu}</h2>
+        <h2 className="text-primary font-bold text-xl">
+          <Link href={`/app/complex/${complex.id}`}>{complex.nameRu}</Link>
+        </h2>
         <span className="text-sm">{district.name} район</span>
         {complex.description && (
           <p className="text-sm text-ellipsis line-clamp-2">
