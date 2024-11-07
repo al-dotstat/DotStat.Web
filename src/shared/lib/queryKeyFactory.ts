@@ -20,6 +20,7 @@ export const complexKeys = {
   all: ["complexes"] as const,
   details: () => [...complexKeys.all, "detail"] as const,
   detail: (id: number) => [...complexKeys.details(), id] as const,
+  table: (id: number) => [...complexKeys.detail(id), "table"] as const,
   search: (data: ComplexFiltersParams) =>
     [...complexKeys.details(), data] as const,
   developers: (id: number) =>

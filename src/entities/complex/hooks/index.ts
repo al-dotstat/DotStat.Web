@@ -6,3 +6,4 @@ export { default as useSearchComplexes } from "./useSearchComplexes";
 export { default as useQueueComplexes } from "./useQueueComplexes";
 export { default as useAddComplexToQueue } from "./useAddComplexToQueue";
 export { default as useDeleteComplexFromQueue } from "./useDeleteComplexFromQueue";
+export { default as useComplexTable } from "./useComplexTable";

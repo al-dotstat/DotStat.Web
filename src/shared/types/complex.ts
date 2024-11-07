@@ -30,3 +30,10 @@ export type ComplexParseParams = {
   includeStorages: boolean;
   includeCommercials: boolean;
 };
+
+export type ComplexTable = {
+  flats?: string[][];
+  parkings?: string[][];
+  storages?: string[][];
+  commercials?: string[][];
+};

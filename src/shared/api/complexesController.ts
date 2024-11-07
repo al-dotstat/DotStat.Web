@@ -1,6 +1,6 @@
 import { Building } from "../types/building";
 import { CollectionResponse } from "../types/common";
-import { Complex, ComplexFiltersParams } from "../types/complex";
+import { Complex, ComplexFiltersParams, ComplexTable } from "../types/complex";
 import { Developer } from "../types/developer";
 import { apiClient } from "./axios";
 
@@ -41,12 +41,28 @@ const getComplexDevelopers = async (id: number) => {
   return response.data.items;
 };
 
+const getComplexTable = async (id: number) => {
+  const response = await apiClient.get<ComplexTable>(
+    `/complexes/${id}/parse/table`,
+    {
+      params: {
+        includeFlats: true,
+        includeParkings: true,
+        includeStorages: true,
+        includeCommercials: true,
+      },
+    }
+  );
+  return response.data;
+};
+
 const complexesController = {
   getComplex,
   getAllComplexes,
   searchComplexes,
   getComplexBuildings,
   getComplexDevelopers,
+  getComplexTable,
 };
 
 export default complexesController;
