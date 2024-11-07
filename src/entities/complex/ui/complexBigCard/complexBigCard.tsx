@@ -6,6 +6,7 @@ import { useComplexDevelopers } from "../../hooks";
 import Image from "next/image";
 import ComplexBigCardSkeleton from "./complexBigCardSkeleton";
 import { complexParams } from "../../utils/complexParams";
+import Block from "@/shared/ui/block";
 
 export interface ComplexBigCardProps {
   complex: Complex;
@@ -25,7 +26,7 @@ const ComplexBigCard: React.FC<ComplexBigCardProps> = ({
 
   return (
     <div className="flex gap-5">
-      <div className="space-y-2">
+      <Block className="space-y-2">
         <Image
           src="/placeholder.png"
           alt={complex.nameRu}
@@ -48,8 +49,8 @@ const ComplexBigCard: React.FC<ComplexBigCardProps> = ({
             </div>
           ))}
         </div>
-      </div>
-      <div className="space-y-5">
+      </Block>
+      <div className="space-y-5 mt-5">
         <h1 className="text-2xl font-bold">{complex.nameRu}</h1>
         {Object.keys(params).map((k) => (
           <div className="" key={k}>
