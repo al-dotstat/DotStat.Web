@@ -6,6 +6,8 @@ import Image from "next/image";
 import React from "react";
 import { complexParams } from "../../utils/complexParams";
 import Link from "next/link";
+import { DeveloperCard } from "@/entities/developer";
+import { apiClient } from "@/shared/api/axios";
 
 export interface ComplexListItemProps {
   complex: Complex;
@@ -25,15 +27,19 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
   const params = complexParams(complex);
 
   return (
-    <div className={"grid grid-cols-[auto_1fr_auto_auto]"}>
+    <div className={"grid grid-cols-[auto_1fr_auto_auto] gap-5"}>
       <div className="flex items-center w-auto">
         <Link href={`/app/complex/${complex.id}`}>
           <Image
             alt={complex.nameRu}
-            src={"/placeholder.png"}
+            src={
+              complex.imageFilePath
+                ? apiClient.getStaticFileUrl(complex.imageFilePath)
+                : "/placeholder.png"
+            }
             width={200}
             height={200}
-            className="max-w-48 aspect-square"
+            className="max-w-48 aspect-square object-cover rounded"
           />
         </Link>
       </div>
@@ -58,16 +64,7 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
       </div>
       <div className="flex flex-col gap-2 p-2 items-center">
         {developers.map((developer) => (
-          <div key={developer.id} className="text-center">
-            <Image
-              alt={developer.nameRu}
-              src={"/placeholder.png"}
-              width={80}
-              height={80}
-              className="max-w-28 aspect-square"
-            />
-            <p className="text-sm font-semibold mt-1">{developer.nameRu}</p>
-          </div>
+          <DeveloperCard developer={developer} key={developer.id} />
         ))}
       </div>
       <div

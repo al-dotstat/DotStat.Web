@@ -7,6 +7,7 @@ declare module "axios" {
     removeAuth: () => void;
     getToken: () => string | null;
     getRefreshToken: () => string | null;
+    getStaticFileUrl: (fileName: string) => string;
     downloadStaticFile: (fileName: string) => Promise<void>;
     downloadFile: (url: string, params?: unknown) => Promise<void>;
   }
@@ -32,6 +33,9 @@ export const apiClient = axios.create({
   withCredentials: true,
   baseURL: process.env.NEXT_PUBLIC_API_URL + "api",
 });
+
+apiClient.getStaticFileUrl = (fileName) =>
+  process.env.NEXT_PUBLIC_API_URL + "StaticFiles" + fileName;
 
 apiClient.downloadFile = (url, params) =>
   apiClient

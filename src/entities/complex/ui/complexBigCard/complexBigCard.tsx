@@ -7,6 +7,7 @@ import Image from "next/image";
 import ComplexBigCardSkeleton from "./complexBigCardSkeleton";
 import { complexParams } from "../../utils/complexParams";
 import Block from "@/shared/ui/block";
+import { apiClient } from "@/shared/api/axios";
 
 export interface ComplexBigCardProps {
   complex: Complex;
@@ -28,10 +29,15 @@ const ComplexBigCard: React.FC<ComplexBigCardProps> = ({
     <div className="flex gap-5">
       <Block className="space-y-2">
         <Image
-          src="/placeholder.png"
+          src={
+            complex.imageFilePath
+              ? apiClient.getStaticFileUrl(complex.imageFilePath)
+              : "/placeholder.png"
+          }
           alt={complex.nameRu}
           width={200}
           height={200}
+          className="aspect-square object-cover rounded"
         />
         <div className="flex gap-2 flex-wrap items-center justify-center">
           {actions}
@@ -40,12 +46,16 @@ const ComplexBigCard: React.FC<ComplexBigCardProps> = ({
           {developers.map((developer) => (
             <div className="flex flex-col items-center" key={developer.id}>
               <Image
-                src="/placeholder.png"
+                src={
+                  developer.imageFilePath
+                    ? apiClient.getStaticFileUrl(developer.imageFilePath)
+                    : "/placeholder.png"
+                }
                 alt={developer.nameRu}
                 width={50}
                 height={50}
+                className="object-contain aspect-square"
               />
-              <span>{developer.nameRu}</span>
             </div>
           ))}
         </div>

@@ -11,6 +11,7 @@ export type Complex = {
   latitude?: string;
   longitude?: string;
   area?: number;
+  imageFilePath?: string;
   completionDate?: string;
   districtId: number;
   developers: ComplexDeveloper[];
