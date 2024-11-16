@@ -8,6 +8,7 @@ import ComplexBigCardSkeleton from "./complexBigCardSkeleton";
 import { complexParams } from "../../utils/complexParams";
 import Block from "@/shared/ui/block";
 import { apiClient } from "@/shared/api/axios";
+import { DeveloperCard } from "@/entities/developer";
 
 export interface ComplexBigCardProps {
   complex: Complex;
@@ -26,7 +27,7 @@ const ComplexBigCard: React.FC<ComplexBigCardProps> = ({
   const params = complexParams(complex);
 
   return (
-    <div className="flex gap-5">
+    <div className="flex max-md:flex-col gap-5">
       <Block className="space-y-2">
         <Image
           src={
@@ -35,28 +36,16 @@ const ComplexBigCard: React.FC<ComplexBigCardProps> = ({
               : "/placeholder.png"
           }
           alt={complex.nameRu}
-          width={200}
-          height={200}
-          className="aspect-square object-cover rounded"
+          width={400}
+          height={400}
+          className="md:max-w-64 md:aspect-square object-cover max-md:w-full max-md:max-h-64 rounded"
         />
         <div className="flex gap-2 flex-wrap items-center justify-center">
           {actions}
         </div>
         <div className="flex gap-2 flex-wrap items-start">
           {developers.map((developer) => (
-            <div className="flex flex-col items-center" key={developer.id}>
-              <Image
-                src={
-                  developer.imageFilePath
-                    ? apiClient.getStaticFileUrl(developer.imageFilePath)
-                    : "/placeholder.png"
-                }
-                alt={developer.nameRu}
-                width={50}
-                height={50}
-                className="object-contain aspect-square"
-              />
-            </div>
+            <DeveloperCard developer={developer} key={developer.id} />
           ))}
         </div>
       </Block>

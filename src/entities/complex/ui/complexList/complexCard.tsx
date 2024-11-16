@@ -27,9 +27,13 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
   const params = complexParams(complex);
 
   return (
-    <div className={"grid grid-cols-[auto_1fr_auto_auto] gap-5"}>
-      <div className="flex items-center w-auto">
-        <Link href={`/app/complex/${complex.id}`}>
+    <div
+      className={
+        "max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[auto_1fr_auto_auto] gap-5"
+      }
+    >
+      <div className="flex items-center lg:w-auto max-lg:w-full">
+        <Link href={`/app/complex/${complex.id}`} className="max-lg:w-full">
           <Image
             alt={complex.nameRu}
             src={
@@ -37,9 +41,9 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
                 ? apiClient.getStaticFileUrl(complex.imageFilePath)
                 : "/placeholder.png"
             }
-            width={200}
-            height={200}
-            className="max-w-48 aspect-square object-cover rounded"
+            width={400}
+            height={400}
+            className="lg:max-w-48 lg:aspect-square object-cover max-lg:w-full max-lg:max-h-48 rounded"
           />
         </Link>
       </div>
@@ -62,15 +66,18 @@ const ComplexCard: React.FC<ComplexListItemProps> = ({
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-2 p-2 items-center">
+      <div className="flex lg:flex-col gap-2 p-2 items-center">
         {developers.map((developer) => (
           <DeveloperCard developer={developer} key={developer.id} />
         ))}
       </div>
       <div
-        className={cn("p-2 flex h-full items-center transition-colors", {
-          "bg-green-400/25 rounded": active,
-        })}
+        className={cn(
+          "p-2 flex lg:flex-col h-full justify-center transition-colors",
+          {
+            "bg-green-400/25 rounded": active,
+          }
+        )}
       >
         {action}
       </div>

@@ -39,7 +39,7 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({}) => {
       />
       <div
         className={cn(
-          "rounded bg-background shadow absolute top-[calc(100%+1.25rem)] left-1/2 -translate-x-1/2 z-20 p-5 border w-[1000px] max-h-[calc(100vh-300px)] overflow-y-auto",
+          "rounded bg-background shadow absolute top-[calc(100%+1.25rem)] left-1/2 -translate-x-1/2 z-20 p-5 border max-w-[calc(100vw-80px)] w-[1000px] max-h-[calc(100vh-300px)] overflow-y-auto",
           {
             hidden: !open,
           }

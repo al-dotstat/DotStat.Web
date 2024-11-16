@@ -22,7 +22,7 @@ const DeveloperBigCard: React.FC<DeveloperBigCardProps> = ({ id }) => {
   if (!isSuccess) return <DeveloperBigCardSkeleton />;
 
   return (
-    <div className="flex gap-5">
+    <div className="flex max-md:flex-col gap-5">
       <Image
         src={
           developer.imageFilePath
@@ -30,9 +30,9 @@ const DeveloperBigCard: React.FC<DeveloperBigCardProps> = ({ id }) => {
             : "/placeholder.png"
         }
         alt={developer.nameRu}
-        width={200}
-        height={200}
-        className="rounded aspect-square object-contain"
+        width={400}
+        height={400}
+        className="md:max-w-64 md:aspect-square object-contain max-md:w-full max-md:max-h-64 rounded"
       />
       <div className="space-y-5">
         <h1 className="text-2xl font-bold">{developer.nameRu}</h1>
