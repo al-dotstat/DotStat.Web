@@ -1,5 +1,6 @@
 import { AuthWindow } from "@/widgets/auth";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function AuthPage() {
   return (
@@ -12,7 +13,9 @@ export default function AuthPage() {
 
       <main className="container">
         <div className="mx-auto max-w-96">
-          <AuthWindow renderCard />
+          <Suspense>
+            <AuthWindow renderCard />
+          </Suspense>
         </div>
       </main>
     </div>

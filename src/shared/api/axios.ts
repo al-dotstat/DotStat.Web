@@ -45,13 +45,12 @@ apiClient.downloadFile = (url, params) =>
     })
     .then((response) => {
       const headerLine = response.headers["content-disposition"] as string;
-      console.log(headerLine);
-      const startFileNameIndex = headerLine.indexOf("filename=") + 9;
-      const endFileNameIndex = headerLine.indexOf(";", startFileNameIndex);
-      const filename = headerLine.substring(
-        startFileNameIndex,
-        endFileNameIndex
-      );
+      let filename = "report.zip";
+      if (headerLine) {
+        const startFileNameIndex = headerLine.indexOf("filename=") + 9;
+        const endFileNameIndex = headerLine.indexOf(";", startFileNameIndex);
+        filename = headerLine.substring(startFileNameIndex, endFileNameIndex);
+      }
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
